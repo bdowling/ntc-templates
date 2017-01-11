@@ -16,10 +16,10 @@
     platform: "{{ template_name.split('_')[0:2] | join('_') }}"
     command_variable: "{{ template_name.split(platform + '_') | last }}"
     command: "{{ command_variable.split('_') | join(' ') }}"
-    
+
   tasks:
 
-  - name: run TextFSM locally on test input
+  - name: "{{template_name}}: run TextFSM on test input"
     ntc_show_command:
       connection: offline
       file: "{{ item }}"
@@ -30,12 +30,12 @@
       - "{{ TEST_DIR }}/{{ platform }}/{{ command_variable }}/{{ template_name }}*.raw"
     register: ntc_result
 
-  - name: read parsed sample files
+  - name: "{{template_name}}: read parsed sample files"
     include_vars: "{{ item.item | regex_replace('\\.raw$', '.parsed') }}"
     with_items: "{{ ntc_result.results }}"
     register: ntc_result
 
-  - name: verify that parsed result is the same as expected
+  - name: "{{template_name}}: verify that parsed result is the same as expected"
     with_items: "{{ ntc_result.results }}"
     compare_dict:
       result: "{{ item.item.response }}"
