@@ -1,0 +1,18 @@
+Community name: ILMI
+Community Index: cisco0
+Community SecurityName: ILMI
+storage-type: read-only  active access-list: SNMPILMIacl
+
+
+
+Community name: public
+Community Index: cisco1
+Community SecurityName: public
+storage-type: nonvolatile        active access-list: SNMPReadAccess
+
+
+Community name: private
+Community Index: cisco2
+Community SecurityName: private
+storage-type: nonvolatile        active access-list: SNMPWriteAccess
+
